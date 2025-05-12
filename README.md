@@ -1,6 +1,6 @@
 ## Introduction
 
-This is a template repository for rust projects. Edit `./Cargo.toml` to get started.
+This project implements common rust libraries that can be used in other projects.
 
 ## Setup
 

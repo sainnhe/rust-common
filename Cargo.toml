@@ -1,19 +1,17 @@
-# Reference: https://doc.rust-lang.org/cargo/reference/manifest.html
-
 [package]
-name = "rust-template"
+name = "sainnhe-common"
 version = "0.1.0"
 authors = ["Sainnhe Park <i@sainnhe.dev>"]
 edition = "2024"
-description = "A short description of my package"
+description = "Common library for rust projects"
 readme = "README.md"
-homepage = "https://www.sainnhe.dev" # Should be a dedicated website for the crate other than the source repository or API documentation. Remove this field if it doesn't exist.
-repository = "https://github.com/sainnhe/rust-template"
-license = "GPL-3.0-or-later" # Remember to update ./deny.toml if you choose another license. Can be combined with keyword "OR", "AND" and "WITH". For a full list see https://spdx.org/licenses/
-keywords = ["template"]
+repository = "https://github.com/sainnhe/rust-common"
+license = "GPL-3.0-or-later"
+keywords = ["common"]
 categories = [
-  "command-line-utilities",
-  "development-tools::cargo-plugins",
+  "algorithms",
+  "command-line-interface",
+  "concurrency",
 ] # See https://crates.io/category_slugs
 exclude = [
   "/.gitignore",
