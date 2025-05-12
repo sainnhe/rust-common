@@ -1,0 +1,29 @@
+#!/bin/sh
+
+print_message() {
+    RED='\033[0;34m'
+    NC='\033[0m' # No Color
+    printf "${RED}==>${NC} %s\n" "${1}"
+}
+
+echo _print_message "Checking format..." &&
+    cargo fmt --check &&
+    print_message "Running cargo check..." &&
+    cargo check &&
+    print_message "Running cargo clippy..." &&
+    cargo clippy &&
+    print_message "Running cargo deny..." &&
+    cargo deny check all &&
+    print_message "Running cargo udeps..." &&
+    cargo +nightly udeps &&
+    print_message "Running tests. The minimum coverage required is 90%" &&
+    cargo tarpaulin \
+        --color always \
+        --stderr \
+        --all-targets \
+        --fail-under 90 \
+        --all-features \
+        --timeout 30 \
+        --locked \
+        --out Html \
+        --fail-immediately

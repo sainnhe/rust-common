@@ -1,0 +1,41 @@
+#!/bin/sh
+
+types=('fix' 'feat' 'build' 'chore' 'ci' 'docs' 'style' 'refactor' 'perf' 'test')
+
+# build the regex pattern based on the config file
+function build_regex() {
+
+  regexp="^[.0-9]+$|"
+
+  regexp="${regexp}^([Rr]evert|[Mm]erge):? .*$|^("
+
+  for type in "${types[@]}"
+  do
+    regexp="${regexp}$type|"
+  done
+
+  regexp="${regexp%|})(\(.+\))?!?: "
+}
+
+# get the first line of the commit message
+INPUT_FILE=$1
+commit_message=`head -n1 $INPUT_FILE`
+
+# Print out a standard error message which explains
+# how the commit message should be structured
+function print_error() {
+  echo "[Invalid Commit Message]"
+  echo "------------------------"
+  echo "Valid types: ${types[@]}"
+  echo "Actual commit message: \"$commit_message\""
+  echo "Example valid commit message: \"fix(subject): message\""
+  echo "Regex: \"$regexp\""
+}
+
+build_regex
+
+if [[ ! $commit_message =~ $regexp ]]; then
+  # commit message is invalid according to config - block commit
+  print_error
+  exit 1
+fi

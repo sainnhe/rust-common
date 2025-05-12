@@ -1,0 +1,27 @@
+# Reference: https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[package]
+name = "rust-template"
+version = "0.1.0"
+authors = ["Sainnhe Park <i@sainnhe.dev>"]
+edition = "2024"
+description = "A short description of my package"
+readme = "README.md"
+homepage = "https://www.sainnhe.dev" # Should be a dedicated website for the crate other than the source repository or API documentation. Remove this field if it doesn't exist.
+repository = "https://github.com/sainnhe/rust-template"
+license = "GPL-3.0-or-later" # Remember to update ./deny.toml if you choose another license. Can be combined with keyword "OR", "AND" and "WITH". For a full list see https://spdx.org/licenses/
+keywords = ["template"]
+categories = [
+  "command-line-utilities",
+  "development-tools::cargo-plugins",
+] # See https://crates.io/category_slugs
+exclude = [
+  "/.gitignore",
+  "/githooks",
+  "/deny.toml",
+] # Use exclude or include to explicitly specify which files are included when packaging a project to be published. You may run cargo package --list to verify which files will be included in the package.
+
+[dependencies]
+
+[lints.rust]
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(tarpaulin_include)'] }
