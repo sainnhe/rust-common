@@ -258,6 +258,12 @@ mod tests {
     static TABLE: &str = "my_tbl";
 
     #[test]
+    fn test_get_tbl() {
+        let sb = StmtBuilder::new(String::from(TABLE));
+        assert_eq!(TABLE, sb.get_tbl());
+    }
+
+    #[test]
     fn test_build_insert_stmt() {
         struct TC<'a> {
             cols: &'a [KV<'a>],
@@ -303,8 +309,8 @@ mod tests {
         ];
 
         for tc in test_cases {
-            let b = StmtBuilder::new(String::from(TABLE));
-            assert_eq!(b.build_insert_stmt(tc.cols), tc.want);
+            let sb = StmtBuilder::new(String::from(TABLE));
+            assert_eq!(sb.build_insert_stmt(tc.cols), tc.want);
         }
     }
 
@@ -359,8 +365,8 @@ mod tests {
         ];
 
         for tc in test_cases {
-            let b = StmtBuilder::new(String::from(TABLE));
-            assert_eq!(b.build_query_stmt(tc.cols, tc.conds), tc.want);
+            let sb = StmtBuilder::new(String::from(TABLE));
+            assert_eq!(sb.build_query_stmt(tc.cols, tc.conds), tc.want);
         }
     }
 
@@ -433,8 +439,8 @@ mod tests {
         ];
 
         for tc in test_cases {
-            let b = StmtBuilder::new(String::from(TABLE));
-            assert_eq!(b.build_update_stmt(tc.cols, tc.conds), tc.want);
+            let sb = StmtBuilder::new(String::from(TABLE));
+            assert_eq!(sb.build_update_stmt(tc.cols, tc.conds), tc.want);
         }
     }
 
@@ -480,8 +486,8 @@ mod tests {
         ];
 
         for tc in test_cases {
-            let b = StmtBuilder::new(String::from(TABLE));
-            assert_eq!(b.build_delete_stmt(tc.conds), tc.want);
+            let sb = StmtBuilder::new(String::from(TABLE));
+            assert_eq!(sb.build_delete_stmt(tc.conds), tc.want);
         }
     }
 }
