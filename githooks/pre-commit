@@ -6,7 +6,7 @@ print_message() {
     printf "${RED}==>${NC} %s\n" "${1}"
 }
 
-echo _print_message "Checking format..." &&
+print_message "Checking format..." &&
     cargo fmt --check &&
     print_message "Running cargo check..." &&
     cargo check &&
