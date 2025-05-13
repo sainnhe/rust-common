@@ -1,4 +1,4 @@
-//! Utilities for sqlx.
+//! Utilities for [`sqlx`].
 
 /// Key-value pair that can be used in building SQL statements.
 #[derive(PartialEq, Eq, Clone, Copy, Hash, Debug)]
@@ -7,14 +7,14 @@ pub struct KV<'a> {
     pub val: &'a str,
 }
 
-/// Builds SQL statements that can be used in sqlx.
+/// Builds SQL statements that can be used in [`sqlx`].
 ///
 /// Since the builder will use string replacement to build SQL statements, please make sure the
 /// values used here, for example the table name and the column names, are safe and won't lead to
 /// SQL injection.
 ///
-/// You can use placeholders in the passed values. Sqlx will bind them to the corresponding
-/// arguments and this process is safe and won't lead to SQL injection.
+/// You can use placeholders in the passed values. [`sqlx`] will bind them to the corresponding
+/// arguments, and this process is safe and won't lead to SQL injection.
 ///
 /// The placeholders used in different database types are as follows:
 ///
