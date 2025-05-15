@@ -20,7 +20,6 @@ exclude = [
 ] # Use exclude or include to explicitly specify which files are included when packaging a project to be published. You may run cargo package --list to verify which files will be included in the package.
 
 [dependencies]
-sqlx = "0.8.5"
 
 [lints.rust]
 unexpected_cfgs = { level = "warn", check-cfg = ['cfg(tarpaulin_include)'] }
