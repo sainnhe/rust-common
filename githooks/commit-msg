@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 types=('fix' 'feat' 'build' 'chore' 'ci' 'docs' 'style' 'refactor' 'perf' 'test')
 
@@ -18,18 +18,30 @@ function build_regex() {
 }
 
 # get the first line of the commit message
-INPUT_FILE=$1
-commit_message=`head -n1 $INPUT_FILE`
+commit_message=`head -n1 $1`
 
 # Print out a standard error message which explains
 # how the commit message should be structured
 function print_error() {
-  echo "[Invalid Commit Message]"
-  echo "------------------------"
-  echo "Valid types: ${types[@]}"
-  echo "Actual commit message: \"$commit_message\""
-  echo "Example valid commit message: \"fix(subject): message\""
-  echo "Regex: \"$regexp\""
+  local red='\033[0;31m'
+  local yellow='\033[0;33m'
+  local blue='\033[0;34m'
+  local nc='\033[0m' # No Color
+
+  echo -e "${red}[ERROR] Invalid Commit Message${nc}"
+  echo -e "------------------------"
+  echo -e "Your commit message does not conform to the conventional commit specification."
+  echo -e "Please follow the format:"
+  echo -e "  ${yellow}<type>(<scope>): <subject>${nc}"
+  echo -e "Valid types:"
+  echo -e "  ${blue}${types[@]}${nc}"
+  echo -e "Examples:"
+  echo -e "  ${blue}feat(api): add new user endpoint${nc}"
+  echo -e "  ${blue}fix: correct typo in documentation${nc}"
+  echo -e "Reference:"
+  echo -e "  ${blue}https://www.conventionalcommits.org${nc}"
+  echo -e "The first line of your actual commit message is:"
+  echo -e "  ${red}${commit_message}${nc}\n"
 }
 
 build_regex
